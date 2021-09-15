@@ -1,3 +1,4 @@
+SET NOCOUNT ON
 DECLARE @TheJSON NVARCHAR(MAX)
 SELECT @TheJSON=(
 SELECT Db_name() AS name,  Json_Query((SELECT name, value FROM sys.extended_properties AS EP2 WHERE EP2.class_desc='Database'FOR JSON auto)) AS properties, Json_Query('['+String_Agg(attributes,',')+']')AS [objects] FROM 
