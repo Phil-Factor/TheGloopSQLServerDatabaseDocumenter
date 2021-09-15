@@ -1,6 +1,8 @@
 SET NOCOUNT ON
-----------------------------------------------------------------
-SELECT The_Schemas.TheSchema AS "Schema", types.TheType AS "type",
+
+DECLARE @JSONDatabaseModel NVARCHAR(MAX)
+SELECT @JSONDatabaseModel=
+(SELECT The_Schemas.TheSchema AS "Schema", types.TheType AS "type",
        names.Name, attributes.TheType, attr.name
   FROM
     --start by finding all schemas being occupied by User objects
@@ -28,7 +30,7 @@ SELECT The_Schemas.TheSchema AS "Schema", types.TheType AS "type",
 			INNER JOIN sys.schemas
 			  ON schemas.schema_id = types.schema_id
 			  WHERE  types.is_user_defined<>0
-		 ) "types"
+		 ) [types]
       ON The_Schemas.TheSchema = types.TheSchema
     LEFT OUTER JOIN
     --now add in all the  base  user objects (Views, tables, functions procs.
@@ -214,4 +216,5 @@ SELECT The_Schemas.TheSchema AS "Schema", types.TheType AS "type",
      AND attr.TheType = attributes.TheType
   ORDER BY
   The_Schemas.TheSchema, types.TheType, names.Name, attributes.TheType,attr.TheOrder
-FOR JSON AUTO;
+FOR JSON AUTO);
+SELECT @JSONDatabaseModel; --needed to work with SQLCMD
