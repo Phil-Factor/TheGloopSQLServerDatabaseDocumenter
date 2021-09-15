@@ -1,12 +1,12 @@
-# TheGloopSQLServerDatabaseDocumenter
- the Gloop: SQL Queries that generate JSON Documentation files
+# The Gloop: SQL Server Database Documenter
+ The Gloop: SQL Queries that generate JSON Documentation files
 
 ## What is the gloop?
 This is a way of extracting the ‘documentable’ metadata from a SQL Server database
 so you can then  inspect and edit it. This means saving it in JSON format  in a file.
 This then will allow you to use whatever JSON editor you prefer. 
 
-I import it into MongoDB. To do the file saving, I use PowerShell. 
+I edit it woth JSONBuddy, import it into MongoDB. To do the file saving, I use PowerShell. 
 
 You can add documentation and write it into the database
 
@@ -21,3 +21,7 @@ This presents objects rather more neatly and provides the metadata about the dat
 ### TheGloopDocumentor.sql
 
 This was my original attempt. I like it because it represents columns and parameters in a more compact way, but it can't be used for documenting a database.
+
+### RusSQLScript.ps1
+
+This is a powershell script for running a SQL batch that returns a string. It will run it on any number of SQL Servers and their databases as you wish.
